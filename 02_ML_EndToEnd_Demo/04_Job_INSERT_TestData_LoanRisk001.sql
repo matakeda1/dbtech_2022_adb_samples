@@ -18,3 +18,19 @@ from loan_stats_test limit 150
 
 -- 確認
 -- select * from dbtech_model_predictions;
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## (補足) スケジュール実行
+-- MAGIC 
+-- MAGIC 本コマンドを、"ワークフロー" タブからスケジュール実行の設定が可能です
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201466289-401d1b9e-b8d7-4448-a834-101563b4ab4e.png)
+
+-- COMMAND ----------
+
+
