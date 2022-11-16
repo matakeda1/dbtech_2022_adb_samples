@@ -92,7 +92,9 @@ def dbtech_model_predictions():
 # MAGIC %md 
 # MAGIC ## 4. ワークフロー (Delta Live Table) の設定
 # MAGIC 
-# MAGIC "ワークフロー"タブを選択し、Delta Live Tables を選択し、本ノートブックを指定・設定しましょう
+# MAGIC "ワークフロー"タブを選択し、Delta Live Tables を選択し、本ノートブックを指定・設定しましょう。
+# MAGIC 
+# MAGIC "トリガー" か "連続" かの選択 (パイプラインモード) については、推論をストリーミング実行する場合には "連続" を指定
 
 # COMMAND ----------
 

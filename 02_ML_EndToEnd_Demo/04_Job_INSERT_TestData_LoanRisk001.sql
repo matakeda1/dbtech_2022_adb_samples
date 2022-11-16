@@ -13,8 +13,16 @@ use <データベース名>;
 -- SQL クエリはスケジュール実行が出来るため、スケジューリングによって、毎分おきに実行することも可能です。
 -- truncate table loan_stats_input;
 
-insert into loan_stats_input select current_timestamp(), * 
-from loan_stats_test limit 150
+insert into loan_stats_input 
+select * except(rowid)
+FROM (
+select 
+row_number() over (order by RAND()) as rowid,
+current_timestamp(), * 
+from loan_stats_test 
+) 
+-- スコアリング対象レコード数はランダムとなるよう入力テーブルにインサートする
+where rowid <= cast(substr(cast(current_timestamp() as char(20)) , 21,3) as int) / 5 + 50
 
 -- 確認
 -- select * from dbtech_model_predictions;

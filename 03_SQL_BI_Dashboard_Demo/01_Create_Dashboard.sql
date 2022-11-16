@@ -2,7 +2,7 @@
 -- MAGIC %md
 -- MAGIC # Databricks Dashboard 作成手順
 -- MAGIC 
--- MAGIC 前述 AutoML / モデル登録 / リアルタイム推論のワークロードで作成されるデータを基に、ダッシュボードを作成します。
+-- MAGIC 前述 AutoML / モデル登録 / リアルタイム推論のワークロードで作成されるデータを基に、ダッシュボード(Loan Risk RealTime Prediction Monitoring)を作成します。</br>
 -- MAGIC 
 -- MAGIC 本MLワークロードのシナリオは、信用リスク分類モデルです。従って、本可視化のダッシュボードでは、信用MLモデルによって判定された結果をダッシュボードでリアルタイムに状況モニタリングする、簡易な例を表現しています。
 -- MAGIC 
@@ -18,7 +18,7 @@
 -- MAGIC %md
 -- MAGIC ## 1. クエリ作成
 -- MAGIC 
--- MAGIC 以下のファイル名で、計4つのクエリをコピーペーストし、各々のクエリを保存してください。
+-- MAGIC 以下のファイル名で、計4つのクエリをコピーペーストし、各々のクエリを保存してください。</br>
 -- MAGIC 
 -- MAGIC SQL タブの SQLエディタにて、以下のように作成・保存ができます。
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201462737-1b5d73de-0d55-406a-bd06-8e091260a96f.png)
@@ -27,7 +27,10 @@
 
 -- ファイル名: Query_LoanRisk_Prediction001
 -- クエリ内容: 推論結果の全件表示
--- 設定内容: LIMIT 1000 の解除、データベース名の設定
+-- 設定内容: 
+-- (1) LIMIT 1000 の解除 （すべてのレコードを取得します)
+-- (2) カタログ名の設定：  hive_metastore (任意のカタログを使用できますが、今回のデモはhive_metastore使用)
+-- (2) データベース名の設定 : 各自のデータベース
 
 select
   *
@@ -38,7 +41,10 @@ from
 
 -- ファイル名: Query_LoanRisk_Prediction002
 -- クエリ内容: 推論結果のうち、融資 NG のみ全件表示
--- 設定内容: LIMIT 1000 の解除、データベース名の設定
+-- 設定内容: 
+-- (1) LIMIT 1000 の解除 （すべてのレコードを取得します)
+-- (2) カタログ名の設定：  hive_metastore (任意のカタログを使用できますが、今回のデモはhive_metastore使用)
+-- (2) データベース名の設定 : 各自のデータベース
 
 select
   *
@@ -51,7 +57,10 @@ where
 
 -- ファイル名: Query_LoanRisk_Prediction003
 -- クエリ内容: 推論結果のうち、融資 OK のみ全件表示
--- 設定内容: LIMIT 1000 の解除、データベース名の設定
+-- 設定内容: 
+-- (1) LIMIT 1000 の解除 （すべてのレコードを取得します)
+-- (2) カタログ名の設定：  hive_metastore (任意のカタログを使用できますが、今回のデモはhive_metastore使用)
+-- (2) データベース名の設定 : 各自のデータベース
 
 select
   *
@@ -64,7 +73,10 @@ where
 
 -- ファイル名: Query_LoanRisk_Prediction004
 -- クエリ内容: 推論結果のうち、融資 NG 比率を計算
--- 設定内容: LIMIT 1000 の解除、データベース名の設定
+-- 設定内容: 
+-- (1) LIMIT 1000 の解除 （すべてのレコードを取得します)
+-- (2) カタログ名の設定：  hive_metastore (任意のカタログを使用できますが、今回のデモはhive_metastore使用)
+-- (3) データベース名の設定 : 各自のデータベース
 
 SELECT
   concat(
@@ -108,7 +120,20 @@ FROM
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC #### リアルタイム信用予測モニタリング
+-- MAGIC Seriesタブでデータラベルを変更しておきます。
+-- MAGIC - 0 => 融資OK
+-- MAGIC - 1 => 融資NG
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201462793-1e274595-62e9-4c1c-b671-ba39e2f22fa0.png)
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC #### 州別融資 NG 割合 (%)
 
 -- COMMAND ----------
 
@@ -118,12 +143,27 @@ FROM
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC #### 住宅別融資 NG 割合 (%)
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201462866-daf05ab0-f017-46ad-bf77-f5a9152d0f56.png)
 
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC #### 雇用形態別融資 NG 割合 (%)
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201462920-15fb4018-dd31-40e7-9051-06d91bd30365.png)
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC #### 目的別 融資 NG 割合 (%)
 
 -- COMMAND ----------
 
@@ -142,12 +182,27 @@ FROM
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC #### 融資 NG カウント数
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201463077-90320ca8-9463-4053-b701-15cb9a2aa942.png)
 
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC #### 融資 NG 申込一覧
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201463122-90354d3b-0136-42e0-ad99-dd6892f52efa.png)
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC #### 融資 NG 件数ヒートマップ
 
 -- COMMAND ----------
 
@@ -164,6 +219,11 @@ FROM
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC #### 融資 OK カウント数
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ![image](https://user-images.githubusercontent.com/38490168/201463176-2b69f909-f6af-4358-a733-8cf2372385f7.png)
 
 -- COMMAND ----------
@@ -172,6 +232,11 @@ FROM
 -- MAGIC ### Query_LoanRisk_Prediction004
 -- MAGIC * 作成する可視化表現
 -- MAGIC     * 融資 NG 比率
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC #### 融資 NG 比率
 
 -- COMMAND ----------
 
@@ -185,7 +250,7 @@ FROM
 -- MAGIC 
 -- MAGIC 上記で作業していた SQLエディタから、シームレスにダッシュボードの作成が可能です。作成した可視化の1つを選択し、"ダッシュボードに追加" を選択しましょう。
 -- MAGIC 
--- MAGIC 最初は、新規のダッシュボードを作成してから可視化を張り付けるようという手順になります。以降、他の可視化については、最初に作成したダッシュボードに貼り付け、最終的には本 notebook の最初に掲示されているようなダッシュボードを作成しましょう。　　
+-- MAGIC 最初は、新規のダッシュボードを作成してから可視化を張り付けるようという手順になります。以降、他の可視化については、最初に作成したダッシュボードに貼り付け、最終的には本 notebook の最初に掲示されているようなアウトプットのイメージを参考にダッシュボードを作成してみましょう。　　
 
 -- COMMAND ----------
 

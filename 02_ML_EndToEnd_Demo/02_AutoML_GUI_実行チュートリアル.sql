@@ -5,7 +5,7 @@
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC ## 参考 Docs
+-- MAGIC ## 参考ドキュメント
 -- MAGIC 
 -- MAGIC https://learn.microsoft.com/ja-jp/azure/databricks/machine-learning/automl/train-ml-model-automl-ui
 
@@ -50,7 +50,7 @@
 -- MAGIC %md
 -- MAGIC ## 推論パイプラインの実行
 -- MAGIC 
--- MAGIC 同ディレクトリに配置された DLT-Inference ノートブックを、環境に合わせてパラメータ設定および実行してください。
+-- MAGIC 同ディレクトリに配置された "03_Predict_(DLTInference_Streaming)" ノートブックを、環境に合わせてパラメータ設定および実行してください。
 -- MAGIC 
 -- MAGIC (上記でメモをしたモデル名、及びデータベース名が必要になります。)
 
