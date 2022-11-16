@@ -1,12 +1,9 @@
 # Databricks notebook source
 # MAGIC %md # Databricksによる機械学習モデルの構築から予測実行まで
 # MAGIC 
-# MAGIC <table>
-# MAGIC   <tr><th>作者</th><th>Databricks Japan</th></tr>
-# MAGIC   <tr><td>日付</td><td>2022/06/20</td></tr>
-# MAGIC   <tr><td>バージョン</td><td>1.0</td></tr>
-# MAGIC   <tr><td>クラスター</td><td>11.0ML</td></tr>
-# MAGIC </table>
+# MAGIC ※ 本 notebook は、Code ベースで ML シナリオをランスルーするノートブックになります。
+# MAGIC 
+# MAGIC ※ 本 notebook を Run All して作成されたデータセットは、後続 notebook (AutoML) でのデータセットとして活用頂けます。
 
 # COMMAND ----------
 
